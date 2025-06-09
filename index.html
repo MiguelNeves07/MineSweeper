@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Campo Minado</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #121212;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(10, 40px);
+      grid-template-rows: repeat(10, 40px);
+      gap: 4px;
+    }
+    .cell {
+      width: 40px;
+      height: 40px;
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .cell.revealed {
+      background-color: #2e2e2e;
+      cursor: default;
+    }
+    .cell.bomb {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>💣 Campo Minado</h1>
+  <div id="grid"></div>
+  <audio id="explosion-sound" src="https://www.myinstants.com/media/sounds/gemi222-gp.mp3" preload="auto"></audio>
+
+  <script>
+    const grid = document.getElementById("grid");
+    const sound = document.getElementById("explosion-sound");
+
+    const rows = 10;
+    const cols = 10;
+    const bombCount = 15;
+    const cells = [];
+
+    function createGrid() {
+      const bombPositions = new Set();
+      while (bombPositions.size < bombCount) {
+        bombPositions.add(Math.floor(Math.random() * rows * cols));
+      }
+
+      for (let i = 0; i < rows * cols; i++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        cell.dataset.index = i;
+        cell.dataset.bomb = bombPositions.has(i) ? "true" : "false";
+
+        cell.addEventListener("click", () => handleClick(cell));
+        grid.appendChild(cell);
+        cells.push(cell);
+      }
+    }
+
+    function handleClick(cell) {
+      if (cell.classList.contains("revealed")) return;
+
+      cell.classList.add("revealed");
+
+      if (cell.dataset.bomb === "true") {
+        cell.classList.add("bomb");
+        sound.play();
+        alert("💥 Você clicou em uma bomba!");
+        revealAll();
+      } else {
+        cell.style.backgroundColor = "#3c3c3c";
+      }
+    }
+
+    function revealAll() {
+      cells.forEach(c => {
+        c.classList.add("revealed");
+        if (c.dataset.bomb === "true") {
+          c.classList.add("bomb");
+        }
+      });
+    }
+
+    createGrid();
+  </script>
+</body>
+</html>
