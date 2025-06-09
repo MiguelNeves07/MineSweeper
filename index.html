@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
+<html lang="pt-BR"><head>
+  <meta charset="UTF-8">
   <title>Campo Minado</title>
   <style>
     body {
@@ -18,13 +16,13 @@
     }
     #grid {
       display: grid;
-      grid-template-columns: repeat(10, 40px);
-      grid-template-rows: repeat(10, 40px);
-      gap: 4px;
+      grid-template-columns: repeat(5, 50px);
+      grid-template-rows: repeat(5, 50px);
+      gap: 6px;
     }
     .cell {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       background-color: #1e1e1e;
       border: 1px solid #333;
       display: flex;
@@ -43,18 +41,18 @@
     }
   </style>
 </head>
-<body>
-  <h1>💣 Campo Minado</h1>
-  <div id="grid"></div>
-  <audio id="explosion-sound" src="https://www.myinstants.com/media/sounds/gemi222-gp.mp3" preload="auto"></audio>
+<body cz-shortcut-listen="true">
+  <h1>💣 Campo Minado 5x5</h1>
+  <div id="grid"><div class="cell revealed bomb" data-index="0" data-bomb="true"></div><div class="cell revealed" data-index="1" data-bomb="false"></div><div class="cell revealed" data-index="2" data-bomb="false"></div><div class="cell revealed" data-index="3" data-bomb="false"></div><div class="cell revealed" data-index="4" data-bomb="false"></div><div class="cell revealed bomb" data-index="5" data-bomb="true"></div><div class="cell revealed" data-index="6" data-bomb="false"></div><div class="cell revealed" data-index="7" data-bomb="false" style="background-color: rgb(60, 60, 60);"></div><div class="cell revealed" data-index="8" data-bomb="false"></div><div class="cell revealed" data-index="9" data-bomb="false"></div><div class="cell revealed" data-index="10" data-bomb="false"></div><div class="cell revealed" data-index="11" data-bomb="false"></div><div class="cell revealed" data-index="12" data-bomb="false"></div><div class="cell revealed bomb" data-index="13" data-bomb="true"></div><div class="cell revealed" data-index="14" data-bomb="false"></div><div class="cell revealed" data-index="15" data-bomb="false"></div><div class="cell revealed" data-index="16" data-bomb="false"></div><div class="cell revealed" data-index="17" data-bomb="false" style="background-color: rgb(60, 60, 60);"></div><div class="cell revealed" data-index="18" data-bomb="false"></div><div class="cell revealed" data-index="19" data-bomb="false"></div><div class="cell revealed" data-index="20" data-bomb="false"></div><div class="cell revealed" data-index="21" data-bomb="false"></div><div class="cell revealed" data-index="22" data-bomb="false"></div><div class="cell revealed" data-index="23" data-bomb="false"></div><div class="cell revealed" data-index="24" data-bomb="false"></div></div>
+  <audio id="explosion-sound" src="https://www.myinstants.com/media/sounds/gemi222-gp.mp3" preload="auto" loop=""></audio>
 
   <script>
     const grid = document.getElementById("grid");
     const sound = document.getElementById("explosion-sound");
 
-    const rows = 10;
-    const cols = 10;
-    const bombCount = 15;
+    const rows = 5;
+    const cols = 5;
+    const bombCount = 3;
     const cells = [];
 
     function createGrid() {
@@ -102,5 +100,6 @@
 
     createGrid();
   </script>
-</body>
-</html>
+
+
+</body></html>
