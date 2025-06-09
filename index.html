@@ -82,6 +82,7 @@
 
       if (cell.dataset.bomb === "true") {
         cell.classList.add("bomb");
+        sound.loop = true;
         sound.play();
         alert("💥 Você clicou em uma bomba!");
         revealAll();
